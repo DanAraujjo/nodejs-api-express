@@ -322,3 +322,11 @@ Para desfazer use o comando
 ```
 yarn sequelize db:migrate:undo
 ```
+
+## Criptografia
+
+Para criptografia iremos utilizar o _bcryptjs_
+
+```
+yarn add bcryptjs
+```
