@@ -25,9 +25,7 @@ yarn add express
 yarn add sucrase nodemon -D
 ```
 
-#### Crie os arquivos
-
-**src/routes.js**
+Crie o arquivo **src/routes.js**
 
 ```
 import { Router } from "express";
@@ -41,7 +39,7 @@ routes.get("/", (req, res) => {
 export default routes;
 ```
 
-**src/app.js**
+Crie o arquivo **src/app.js**
 
 ```
 import express from "express";
@@ -68,7 +66,7 @@ export default new App().server;
 
 ```
 
-**src/server.js**
+Crie o arquivo **src/server.js**
 
 ```
 import app from "./app";
@@ -76,7 +74,7 @@ import app from "./app";
 app.listen(3333);
 ```
 
-**nodemon.json**
+Crie o arquivo **nodemon.json**
 
 ```
 {
@@ -86,9 +84,7 @@ app.listen(3333);
 }
 ```
 
-#### Altere o arquivo
-
-Acresentar no arquivo **package.json**
+Acresente no arquivo **package.json**
 
 ```
   "scripts": {
@@ -119,7 +115,7 @@ import 'dotenv/config';
 
 ## Padronização de Projetos (ESLint, Prettier & EditorConfig)
 
-Execute os comando abaixo
+Execute os comando abaixo:
 
 ```
 yarn add eslint -D
