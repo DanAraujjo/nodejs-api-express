@@ -1,6 +1,6 @@
 # Criando uma Api REST com NodeJS
 
-### 1º - Criar o projeto
+## Criando a base do projeto
 
 Crie uma pasta como o nome do projeto (mkdir _nome-projeto_)
 
@@ -25,7 +25,7 @@ yarn add express
 yarn add sucrase nodemon -D
 ```
 
-### 2º - Crie os arquivos
+#### Crie os arquivos
 
 **src/routes.js**
 
@@ -68,20 +68,12 @@ export default new App().server;
 
 ```
 
-**_src/server.js_**
+**src/server.js**
 
 ```
 import app from "./app";
 
 app.listen(3333);
-```
-
-Acresentar no arquivo **package.json**
-
-```
-  "scripts": {
-    "dev": "nodemon src/server.js"
-  }
 ```
 
 Criar o arquivo **nodemon.json**
@@ -93,3 +85,15 @@ Criar o arquivo **nodemon.json**
   }
 }
 ```
+
+#### Altere o arquivo
+
+Acresentar no arquivo **package.json**
+
+```
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  }
+```
+
+
