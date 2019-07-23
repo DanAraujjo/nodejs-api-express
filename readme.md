@@ -338,3 +338,11 @@ Para as validações iremos utilizar o [Yup](https://github.com/jquense/yup)
 ```
 yarn add yup
 ```
+
+## Criação do Model e do Controller
+
+Crie o model **src/app/models/[User]().js**
+
+Crie o Controller **src/app/controllers/[UserController]().js**
+
+Inclua as rotas no arquivo **src/[routes]().js**
