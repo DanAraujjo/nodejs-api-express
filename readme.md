@@ -76,7 +76,7 @@ import app from "./app";
 app.listen(3333);
 ```
 
-Criar o arquivo **nodemon.json**
+**nodemon.json**
 
 ```
 {
@@ -94,6 +94,27 @@ Acresentar no arquivo **package.json**
   "scripts": {
     "dev": "nodemon src/server.js"
   }
+```
+
+## Variáveis ambiente
+
+Execute o comando:
+
+```
+yarn add dotenv
+```
+
+Crie o arquivo **.env**
+
+```
+APP_URL= http://localhost:3333
+NODE_ENV=development
+```
+
+Inclua no arquivo **src/app.js**
+
+```
+import 'dotenv/config';
 ```
 
 ## Padronização de Projetos (ESLint, Prettier & EditorConfig)
@@ -184,5 +205,85 @@ insert_final_newline = true
 Após instalar o Docker, execute os comandos:
 
 ```
-docker run --name nome-do-seu-banco -e POSTGRES_PASSWORD=senha-acesso -p 5432:5432 -d postgres
+docker run --name nome-do-container -e POSTGRES_PASSWORD=senha-acesso -p 5432:5432 -d postgres
+```
+
+Você pode usar o [Postbird](https://electronjs.org/apps/postbird) para criar o banco via interface (Gui)
+
+## Sequelize (ORM)
+
+Execute os comandos:
+
+```
+yarn add sequelize
+yarn add sequelize-cli -D
+```
+
+Se estiver utilizando o Postgres, excute também:
+
+```
+yarn add pg pg-hstore
+```
+
+Adcione ao arquivo **.env**
+
+```
+# Database
+
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASS=senha-acesso
+DB_NAME=nome-do-seu-banco
+```
+
+Crie o arquivo **src/config/database.js**
+
+```
+require('dotenv/config');
+
+module.exports = {
+  dialect: 'postgres',
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true,
+  },
+};
+```
+
+Crie o arquivo **src/database/index.js**
+
+```
+import Sequelize from 'sequelize';
+
+import databaseConfig from '../config/database';
+
+const models = [];
+
+class Database {
+  constructor() {
+    // conexão com o banco de dados
+    this.connection = new Sequelize(databaseConfig);
+
+    this.init();
+
+    this.associate();
+  }
+
+  init() {
+    models.forEach(model => model.init(this.connection));
+  }
+
+  associate() {
+    models.forEach(
+      model => model.associate && model.associate(this.connection.models)
+    );
+  }
+}
+
+export default new Database();
 ```
