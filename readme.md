@@ -178,3 +178,11 @@ insert_final_newline = true
 ```
  yarn eslint --fix src --ext .js
 ```
+
+## Banco de dados ([Docker](https://docs.docker.com/install/) com Postgres)
+
+Após instalar o Docker, execute os comandos:
+
+```
+docker run --name nome-do-seu-banco -e POSTGRES_PASSWORD=senha-acesso -p 5432:5432 -d postgres
+```
