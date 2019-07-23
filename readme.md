@@ -94,7 +94,7 @@ Acresente no arquivo **package.json**
 
 ## Variáveis ambiente
 
-Execute o comando:
+Execute o comando
 
 ```
 yarn add dotenv
@@ -115,14 +115,14 @@ import 'dotenv/config';
 
 ## Padronização de Projetos (ESLint, Prettier & EditorConfig)
 
-Execute os comando abaixo:
+Execute os comandos abaixo
 
 ```
 yarn add eslint -D
 yarn eslint --init
 ```
 
-Selecione:
+Selecione
 
 - To check syntax, find problems, and enforce code style
 - JavaScript modules (import/export)
@@ -177,7 +177,7 @@ module.exports = {
 };
 ```
 
-No VsCode, clique com botão direito e selecionar a opção _generate .editorconfig_
+No VSCode, clique com botão direito e selecionar a opção _generate .editorconfig_
 
 ```
 root = true
@@ -198,7 +198,7 @@ insert_final_newline = true
 
 ## Banco de dados ([Docker](https://docs.docker.com/install/) com Postgres)
 
-Após instalar o Docker, execute os comandos:
+Após instalar o Docker, execute o comando:
 
 ```
 docker run --name nome-do-container -e POSTGRES_PASSWORD=senha-acesso -p 5432:5432 -d postgres
@@ -208,14 +208,28 @@ Você pode usar o [Postbird](https://electronjs.org/apps/postbird) para criar o 
 
 ## Sequelize (ORM)
 
-Execute os comandos:
+Execute os comandos
 
 ```
 yarn add sequelize
 yarn add sequelize-cli -D
 ```
 
-Se estiver utilizando o Postgres, excute também:
+Crie o arquivo **.sequelizerc**
+
+```
+const { resolve } = require('path');
+
+module.exports = {
+  config: resolve(__dirname,'src', 'config', 'database.js'),
+  'models-path': resolve(__dirname,'src', 'app', 'models'),
+  'migrations-path': resolve(__dirname,'src', 'database', 'migrations'),
+  'seeders-path': resolve(__dirname,'src', 'database', 'seeds'),
+}
+
+```
+
+Se estiver utilizando o Postgres, excute também
 
 ```
 yarn add pg pg-hstore
@@ -249,6 +263,7 @@ module.exports = {
     underscoredAll: true,
   },
 };
+
 ```
 
 Crie o arquivo **src/database/index.js**
@@ -282,4 +297,28 @@ class Database {
 }
 
 export default new Database();
+```
+
+## Migrations (Exemplo)
+
+Crie a pasta **src/database/migrations**
+
+Execute o comando
+
+```
+yarn sequelize migration:create --name=create-users
+```
+
+Exemplo do arquivo [migration-create-users]()
+
+Para criar a tabela users no banco de dados use o comando
+
+```
+yarn sequelize db:migrate
+```
+
+Para desfazer use o comando
+
+```
+yarn sequelize db:migrate:undo
 ```
