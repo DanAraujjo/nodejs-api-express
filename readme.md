@@ -330,3 +330,11 @@ Para criptografia iremos utilizar o _bcryptjs_
 ```
 yarn add bcryptjs
 ```
+
+## Validação dados de entrada
+
+Para as validações iremos utilizar o [Yup](https://github.com/jquense/yup)
+
+```
+yarn add yup
+```
