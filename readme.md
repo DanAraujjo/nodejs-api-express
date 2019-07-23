@@ -75,3 +75,21 @@ import app from "./app";
 
 app.listen(3333);
 ```
+
+Acresentar no arquivo **package.json**
+
+```
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  }
+```
+
+Criar o arquivo **nodemon.json**
+
+```
+{
+  "execMap": {
+    "js": "sucrase-node"
+  }
+}
+```
