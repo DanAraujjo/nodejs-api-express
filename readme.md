@@ -96,4 +96,85 @@ Acresentar no arquivo **package.json**
   }
 ```
 
+## Padronização de Projetos (ESLint, Prettier & EditorConfig)
 
+Execute os comando abaixo
+
+```
+yarn add eslint -D
+yarn eslint --init
+```
+
+Selecione:
+
+- To check syntax, find problems, and enforce code style
+- JavaScript modules (import/export)
+- None of these
+- Marque somente Node
+- Use a popular style guide
+- Airbnb (https://github.com/airbnb/javascript)
+- Javascript
+- Y
+
+Ao terminar, exclua o arquivo _package-lock.json_ e execute os comandos
+
+```
+yarn
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+```
+
+Crie o arquivo **.prettierrc**
+
+```
+{
+  "singleQuote": true,
+  "trailingComma": "es5"
+}
+```
+
+Altere o arquivo **.eslintrc.js**
+
+```
+module.exports = {
+  env: {
+    es6: true,
+    node: true,
+  },
+  extends: ['airbnb-base', 'prettier'],
+  plugins: ['prettier'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  rules: {
+    'prettier/prettier': 'error',
+    'class-methods-use-this': 'off',
+    'no-param-reassign': 'off',
+    camelcase: 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+  },
+};
+```
+
+No VsCode, clique com botão direito e selecionar a opção _generate .editorconfig_
+
+```
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+```
+
+> Para corrigir todos arquivos (indentação)
+
+```
+ yarn eslint --fix src --ext .js
+```
