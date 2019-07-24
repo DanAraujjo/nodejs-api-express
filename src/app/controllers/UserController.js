@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 import User from '../models/User';
 
+import Queue from '../../lib/Queue';
+import UpdateUserMail from '../jobs/UpdateUserMail';
+
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -78,6 +81,9 @@ class UserController {
     }
 
     await user.update(req.body);
+
+    // envio de email
+    await Queue.add(UpdateUserMail.key, { user });
 
     return res.json({ message: 'Usuário atualizado!' });
   }

@@ -223,7 +223,7 @@ Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/m
 SENTRY_DSN='https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984'
 ```
 
-###### A url é mesma que mostra no seu projeto no Sentry. Exemplo: Sentry.init({ dsn: 'https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984' });
+> A url é mesma que mostra no seu projeto no Sentry. Exemplo: Sentry.init({ dsn: 'https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984' });
 
 Crie o arquivo **src/config/sentry.js**
 
@@ -460,7 +460,7 @@ Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/m
 APP_SECRET=9f14070c64a04b5144ff59f42d4edf7b
 ```
 
-###### Chave gerada no site https://www.md5online.org/
+> Chave gerada no site https://www.md5online.org/
 
 Crie o arquivo **src/config/auth.js**
 
@@ -571,3 +571,7 @@ import authMiddleware from './app/middlewares/auth';
 routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 ```
+
+## Envio de E-mail
+
+Veja [aqui](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/envio-email.md)
