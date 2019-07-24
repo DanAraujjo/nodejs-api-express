@@ -196,6 +196,87 @@ insert_final_newline = true
  yarn eslint --fix src --ext .js
 ```
 
+## Tratamento de exceções
+
+Execute os comandos
+
+```
+yarn add youch
+yarn add express-async-errors
+```
+
+Iremos utilizar também o [Sentry](https://sentry.io)
+
+Faça login com sua conta, crie um projeto e siga tutorial.
+
+> Exemplo
+
+```
+yarn add @sentry/node@5.5.0
+```
+
+Adcione ao arquivo **.env**
+
+> A url é mesma que mostra no seu projeto no Sentry. Exemplo: Sentry.init({ dsn: 'https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984' });
+
+```
+# Sentry
+
+SENTRY_DSN='https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984'
+```
+
+Crie o arquivo **src/config/sentry.js**
+
+```
+export default {
+  dsn: process.env.SENRTY_DSN,
+};
+
+```
+
+Inclua no arquivo **src/[app](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app.js).js**
+
+```
+import Youch from 'youch';
+
+import * as Sentry from '@sentry/node';
+import 'express-async-errors';
+
+import sentryConfig from './config/sentry';
+
+...
+
+Sentry.init(sentryConfig);
+
+...
+
+this.exceptionHandler();
+
+...
+
+this.server.use(Sentry.Handlers.requestHandler());
+
+...
+
+this.server.use(Sentry.Handlers.errorHandler());
+
+...
+
+exceptionHandler() {
+    this.server.use(async (err, req, res, next) => {
+      if (process.env.NODE_ENV === 'development') {
+        const errors = await new Youch(err, req).toJSON();
+
+        return res.status(500).json(errors);
+      }
+
+      return res
+        .status(500)
+        .json({ error: 'Oops! Occoreu um erro no servidor!' });
+    });
+  }
+```
+
 ## Banco de dados ([Docker](https://docs.docker.com/install/) com Postgres)
 
 Após instalar o Docker, execute o comando:
@@ -341,8 +422,8 @@ yarn add yup
 
 ## Criação do Model e do Controller
 
-Crie o model **src/app/models/[User]().js**
+Crie o model **src/app/models/[User](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app/models/User.js).js**
 
-Crie o Controller **src/app/controllers/[UserController]().js**
+Crie o Controller **src/app/controllers/[UserController](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app/controllers/UserController.js).js**
 
-Inclua as rotas no arquivo **src/[routes]().js**
+Inclua as rotas no arquivo **src/[routes](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/routes.js).js**
