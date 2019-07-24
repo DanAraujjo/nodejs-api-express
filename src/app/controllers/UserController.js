@@ -79,7 +79,7 @@ class UserController {
 
     await user.update(req.body);
 
-    return res.json({ error: 'Usuário atualizado!' });
+    return res.json({ message: 'Usuário atualizado!' });
   }
 }
 

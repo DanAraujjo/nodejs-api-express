@@ -215,15 +215,15 @@ Faça login com sua conta, crie um projeto e siga tutorial.
 yarn add @sentry/node@5.5.0
 ```
 
-Adcione ao arquivo **.env**
-
-> A url é mesma que mostra no seu projeto no Sentry. Exemplo: Sentry.init({ dsn: 'https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984' });
+Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/.env)**
 
 ```
 # Sentry
 
 SENTRY_DSN='https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984'
 ```
+
+###### A url é mesma que mostra no seu projeto no Sentry. Exemplo: Sentry.init({ dsn: 'https://6b1a0c46525042f491a188aba36f68be@sentry.io/1511984' });
 
 Crie o arquivo **src/config/sentry.js**
 
@@ -316,7 +316,7 @@ Se estiver utilizando o Postgres, excute também
 yarn add pg pg-hstore
 ```
 
-Adcione ao arquivo **.env**
+Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/.env)**
 
 ```
 # Database
@@ -442,4 +442,132 @@ import User from '../app/models/User';
 ...
 
 const models = [User];
+```
+
+## JWT Token
+
+Execute o comando
+
+```
+yarn add jsonwebtoken
+```
+
+Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/.env)**
+
+```
+# Auth
+
+APP_SECRET=9f14070c64a04b5144ff59f42d4edf7b
+```
+
+###### Chave gerada no site https://www.md5online.org/
+
+Crie o arquivo **src/config/auth.js**
+
+```
+export default {
+  secret: process.env.APP_SECRET,
+  expiresIn: '30d',
+};
+
+```
+
+Crie um middleware (**src/src/app/middlewares/auth.js**)
+
+```
+import jwt from 'jsonwebtoken';
+import { promisify } from 'util';
+
+import authConfig from '../../config/auth';
+
+export default async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Token não informado!' });
+  }
+
+  const [, token] = authHeader.split(' ');
+
+  try {
+    const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+
+    req.userId = decoded.id;
+
+    return next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Token inválido!' });
+  }
+};
+
+```
+
+Crie um Controller **src/app/controllers/SessionController.js**
+
+```
+import jwt from 'jsonwebtoken';
+import * as Yup from 'yup';
+
+import User from '../models/User';
+import authConfig from '../../config/auth';
+
+class SessionController {
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email()
+        .required(),
+      password: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validação falou!' });
+    }
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'E-mail não encontrado!' });
+    }
+
+    if (!(await user.checkPassword(password))) {
+      return res.status(401).json({ error: 'Senha inválida' });
+    }
+
+    const { id, name } = user;
+
+    return res.json({
+      user: {
+        id,
+        name,
+        email,
+      },
+      token: jwt.sign(
+        {
+          id,
+        },
+        authConfig.secret,
+        {
+          expiresIn: authConfig.expiresIn,
+        }
+      ),
+    });
+  }
+}
+
+export default new SessionController();
+```
+
+Inclua no arquivo **src/[routes](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/routes.js).js**
+
+```
+import SessionController from './app/controllers/SessionController';
+import authMiddleware from './app/middlewares/auth';
+
+...
+
+routes.post('/sessions', SessionController.store);
+routes.use(authMiddleware);
 ```
