@@ -32,11 +32,11 @@ MAIL_USER=5aa6d46dd58e50
 MAIL_PASS=53053a95fd68d9
 ```
 
-Crie o arquivo **src/config/[redis]().js**
+Crie o arquivo **src/config/[redis](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/config/redis.js).js**
 
-Crie o arquivo **src/lib/[Queue]().js**
+Crie o arquivo **src/lib/[Queue](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/lib/Queue.js).js**
 
-Crie o arquivo **src/[queue]().js**
+Crie o arquivo **src/[queue](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/queue.js).js**
 
 Adcionar ao **package.json**
 
@@ -97,9 +97,9 @@ yarn add nodemailer
 
 Crie os arquivos
 
-- [src/config/mail.js]()
-- [src/lib/Mail.js]()
-- [src/app/jobs/UpdateUserMail.js]()
+- [src/config/mail.js](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/config/mail.js)
+- [src/lib/Mail.js](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/lib/Mail.js)
+- [src/app/jobs/UpdateUserMail.js](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app/jobs/UpdateUserMail.js)
 
 Inclua no Controller que irá enviar o e-mail (Ex: UserController)
 
