@@ -428,6 +428,12 @@ Crie o Controller **src/app/controllers/[UserController](https://github.com/DanA
 
 Inclua as rotas no arquivo **src/[routes](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/routes.js).js**
 
+```
+routes.post('/users', UserController.store);
+
+routes.put('/users', UserController.update);
+```
+
 Inclua no arquivo **src/database/[index](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/database/index.js).js**
 
 ```
