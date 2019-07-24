@@ -427,3 +427,13 @@ Crie o model **src/app/models/[User](https://github.com/DanAraujjo/nodejs-api-re
 Crie o Controller **src/app/controllers/[UserController](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app/controllers/UserController.js).js**
 
 Inclua as rotas no arquivo **src/[routes](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/routes.js).js**
+
+Inclua no arquivo **src/database/[index](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/database/index.js).js**
+
+```
+import User from '../app/models/User';
+
+...
+
+const models = [User];
+```
