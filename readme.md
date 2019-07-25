@@ -215,7 +215,7 @@ Faça login com sua conta, crie um projeto e siga tutorial.
 yarn add @sentry/node@5.5.0
 ```
 
-Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/.env)**
+Adcione ao arquivo **[.env](/.env)**
 
 ```
 # Sentry
@@ -234,7 +234,7 @@ export default {
 
 ```
 
-Inclua no arquivo **src/[app](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app.js).js**
+Inclua no arquivo **src/[app](/src/app.js).js**
 
 ```
 import Youch from 'youch';
@@ -316,7 +316,7 @@ Se estiver utilizando o Postgres, excute também
 yarn add pg pg-hstore
 ```
 
-Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/.env)**
+Adcione ao arquivo **[.env](/.env)**
 
 ```
 # Database
@@ -422,11 +422,11 @@ yarn add yup
 
 ## Criação do Model e do Controller
 
-Crie o model **src/app/models/[User](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app/models/User.js).js**
+Crie o model **src/app/models/[User](/src/app/models/User.js).js**
 
-Crie o Controller **src/app/controllers/[UserController](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/app/controllers/UserController.js).js**
+Crie o Controller **src/app/controllers/[UserController](/src/app/controllers/UserController.js).js**
 
-Inclua as rotas no arquivo **src/[routes](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/routes.js).js**
+Inclua as rotas no arquivo **src/[routes](/src/routes.js).js**
 
 ```
 routes.post('/users', UserController.store);
@@ -434,7 +434,7 @@ routes.post('/users', UserController.store);
 routes.put('/users', UserController.update);
 ```
 
-Inclua no arquivo **src/database/[index](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/database/index.js).js**
+Inclua no arquivo **src/database/[index](/src/database/index.js).js**
 
 ```
 import User from '../app/models/User';
@@ -452,7 +452,7 @@ Execute o comando
 yarn add jsonwebtoken
 ```
 
-Adcione ao arquivo **[.env](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/.env)**
+Adcione ao arquivo **[.env](/.env)**
 
 ```
 # Auth
@@ -560,7 +560,7 @@ class SessionController {
 export default new SessionController();
 ```
 
-Inclua no arquivo **src/[routes](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/src/routes.js).js**
+Inclua no arquivo **src/[routes](/src/routes.js).js**
 
 ```
 import SessionController from './app/controllers/SessionController';
@@ -574,4 +574,4 @@ routes.use(authMiddleware);
 
 ## Envio de E-mail
 
-Veja [aqui](https://github.com/DanAraujjo/nodejs-api-rest/blob/master/envio-email.md)
+Veja [aqui](/envio-email.md)
