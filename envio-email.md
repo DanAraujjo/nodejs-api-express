@@ -76,7 +76,7 @@ Equipe Dev
 ```
 
 - src/app/views/emails/updateuser.hbs
-  > Utilie o nome do modelo que desejar
+  > Utilize o nome do modelo que desejar
 
 ```
 <strong>Olá!</strong>
