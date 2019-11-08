@@ -1,4 +1,4 @@
-# Criando uma Api REST com NodeJS
+# Criando uma Api REST com NodeJS e Express
 
 ## Criando a base do projeto
 
